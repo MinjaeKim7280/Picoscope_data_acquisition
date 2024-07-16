@@ -721,7 +721,13 @@ def check_queue_size(queue, warning_threshold=0.5, critical_threshold=0.8):
 
     return fill_ratio  # Return the fill ratio in case it's needed elsewhere
 
-        
+def exit():
+    """
+    Exit the program with a message and wait for user input.
+    """
+    print("Press Enter to exit...")
+    input()
+    
 if __name__ == "__main__":
     """
     This block of code is the main entry point of the program. 
@@ -811,6 +817,7 @@ if __name__ == "__main__":
     except Exception as e:
         if not exit_event.is_set():
             logging.error(f"Error in main process: {e}")
+            exit()
     finally:
         # Clean up and close the program
         exit_event.set()
@@ -835,3 +842,4 @@ if __name__ == "__main__":
         ps.ps5000aCloseUnit(chandle)
         logging.info("Device closed")
         logging.info("Data saved and program terminated")
+        exit()
