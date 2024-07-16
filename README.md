@@ -26,7 +26,7 @@ This repository contains tools for data acquisition using the PicoScope 5000A se
 
 ## Detailed Instructions
 
-For detailed setup and usage instructions, please refer to the `User_Guide.md` file.
+For detailed setup and usage instructions, please refer to the `User_Guide.pdf` file.
 
 ## Troubleshooting
 
