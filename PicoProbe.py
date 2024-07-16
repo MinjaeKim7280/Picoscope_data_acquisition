@@ -1,6 +1,8 @@
-import ctypes, sys, time, pickle, os, datetime, queue, multiprocessing, logging, signal
+# Copyright (C) 2018-2022 Pico Technology Ltd. See LICENSE file for terms.
+
+import ctypes, time, os, datetime, queue, multiprocessing, logging, signal
 from picosdk.ps5000a import ps5000a as ps
-from picosdk.functions import adc2mV, assert_pico_ok
+from picosdk.functions import assert_pico_ok
 import numpy as np
 
 # Set up logging to display information, warnings, and errors
@@ -549,8 +551,6 @@ def save_data_worker(data_queue, output_folder, exit_event):
             if channel_data is None:  # Check for termination signal
                 break
 
-            logging.info(f"Processing data batch {data_counter}")
-
             for channel, data in channel_data.items():
                 channel_folder = os.path.join(output_folder, f"channel_{channel.lower()}")
                 os.makedirs(channel_folder, exist_ok=True)
@@ -777,14 +777,15 @@ if __name__ == "__main__":
         - If the `save_process` is still alive after the timeout, it's forcibly terminated and then joined to ensure it completes.
         - Logs messages to confirm file saving, device closing, and program termination.
     """
-    print("*****PicoScope 5000A Data Acquisition and Analysis Tool by M.J*****\n\n")
+    print("*****PicoScope 5000A Data Acquisition Tool by M.J.*****\n\n")
     
     multiprocessing.freeze_support()  # Necessary for Windows
 
     # Create a directory for storing data with a timestamp
     current_time = datetime.datetime.now().strftime("%m%d_%H%M%S")
     output_folder = f"data{current_time}"
-    os.makedirs(output_folder, exist_ok=True)
+    current_path = os.getcwd()
+    os.makedirs(current_path + "/" + output_folder, exist_ok=True)
     logging.info(f"Directory created: {output_folder}")
 
     # Get user settings
