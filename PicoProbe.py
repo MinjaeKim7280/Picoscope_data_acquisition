@@ -1,4 +1,5 @@
 # Copyright (C) 2018-2022 Pico Technology Ltd. See LICENSE file for terms.
+# PicoScope 5000 Series (A API) Data Streaming tool by MJ
 
 import ctypes, time, os, datetime, queue, multiprocessing, logging, signal
 from picosdk.ps5000a import ps5000a as ps
